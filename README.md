@@ -25,7 +25,8 @@ No assets, external packages, HTTP calls or DataStores are required by the libra
 
 ### Roblox Studio
 
-Build the model with Node.js:
+Download `RemoteGuard.rbxmx` from the [0.1.0 alpha release](https://github.com/younesha321-hub/Roblox-Game-Creation-Vfx/releases/tag/v0.1.0).
+You can also build the same model from the source with Node.js:
 
 ```sh
 node tools/build-model.mjs
@@ -148,7 +149,8 @@ accepted, including an explicit `nil` if its validator permits it.
 
 Invalid requests consume tokens before validation. Validator and authorization
 callbacks must return exactly `true` to proceed. During any yielding callback,
-further requests by that player to the same binding are dropped as busy. This
+further requests by that player to the same binding are rejected as busy if a
+token is available; requests with no token are counted as rateLimited first. This
 does not serialize different players or different bindings. Authorization should
 be quick; important mutations must recheck shared state and commit without yielding.
 

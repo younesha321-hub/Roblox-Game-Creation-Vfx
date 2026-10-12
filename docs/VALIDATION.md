@@ -10,6 +10,7 @@ Checked on **12 October 2026** against the files in this package.
 | `luau-analyze` on Validate and RateLimiter | Passed | Engine-independent module type analysis |
 | `luau-compile --null` on all library, test and example sources | Passed | Syntax and bytecode compilation; not a full engine type analysis |
 | Studio model generation | Passed | Model generated directly from the current sources |
+| GitHub Actions, first public commit | Passed | [Luau checks run](https://github.com/younesha321-hub/Roblox-Game-Creation-Vfx/actions/runs/38263690875), commit `e2f8a84a6e90162e10b501067b6c54e6d0cc87f5` |
 
 There are **64 distinct behavioral cases**. Running the same 44 core cases in
 two runtimes does not create 88 distinct cases. Neither the test counts nor the
@@ -36,7 +37,7 @@ published or migrated as part of this check.
   real Studio clients have not been tested by the mock signal suite.
 - The standalone library has not been integrated into a production game.
 - No performance, transport-level denial-of-service or external adoption claims
-  are made. CI is configured; a GitHub Actions run has not yet been observed.
+  are made. The first public GitHub Actions run completed successfully.
 
 Before production use, playtest the demo in a separate place with two clients,
 check valid, malformed and repeated requests, verify independent limits and
