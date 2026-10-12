@@ -1,0 +1,13 @@
+.tools/
+.test-build/
+dist/
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+.env
+.env.*

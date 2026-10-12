@@ -1,0 +1,33 @@
+name: Luau checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Install official Luau 0.742 CLI
+        run: |
+          mkdir -p .tools/luau
+          curl --fail --location --retry 3 https://github.com/luau-lang/luau/releases/download/0.742/luau-ubuntu.zip --output .tools/luau.zip
+          echo '152058b98c60ff1f5b5ec9bca0b8eb37793cae161dd3a05608cc3d8738ba1a4d .tools/luau.zip' | sha256sum --check
+          unzip -q .tools/luau.zip -d .tools/luau
+          chmod +x .tools/luau/luau .tools/luau/luau-analyze .tools/luau/luau-compile
+      - name: Test core and binding behavior
+        run: |
+          .tools/luau/luau tests/run.luau
+          node tools/test-binding.mjs .tools/luau/luau
+          .tools/luau/luau-analyze src/Validate.luau src/RateLimiter.luau
+          find src tests examples -name '*.luau' -print0 | xargs -0 .tools/luau/luau-compile --null
+      - name: Build Studio module
+        run: node tools/build-model.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: RemoteGuard-Studio
+          path: dist/RemoteGuard.rbxmx

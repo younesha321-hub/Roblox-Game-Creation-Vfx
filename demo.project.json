@@ -1,0 +1,29 @@
+{
+  "name": "RemoteGuardDemo",
+  "tree": {
+    "$className": "DataModel",
+    "ServerScriptService": {
+      "RemoteGuard": { "$path": "src" },
+      "RemoteGuardDemo": { "$path": "examples/Pickup.server.luau" }
+    },
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "RemoteGuardDemo": { "$path": "examples/Pickup.client.luau" }
+      }
+    },
+    "Workspace": {
+      "Baseplate": {
+        "$className": "Part",
+        "$properties": {
+          "Anchored": true,
+          "Size": [100, 1, 100],
+          "Position": [0, -0.5, 0]
+        }
+      },
+      "Spawn": {
+        "$className": "SpawnLocation",
+        "$properties": { "Anchored": true, "Position": [0, 0.5, 0], "Size": [6, 1, 6] }
+      }
+    }
+  }
+}
